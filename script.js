@@ -1,16 +1,20 @@
-const ladybug = document.getElementById("box");
+const ladybug = document.getElementById("ladybug");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const greeting = document.getElementById("game-greeting");
 
 var background = new Image();
-background.src =
-  "https://user-images.githubusercontent.com/18351809/46888871-624a3900-ce7f-11e8-808e-99fd90c8a3f4.png";
 
-window.addEventListener("keydown", function () {
-  greeting.textContent = "Good Luck!";
-  startPlaying();
-}, {once: true});
+background.src =
+  "https://media.istockphoto.com/id/910093668/vector/pixel-art-seamless-background-with-sky-and-ground.jpg?s=612x612&w=0&k=20&c=3h9KbbrrvGBFLH1Vp7yyc0U9Rh13wzc6aJcV49IbVP4=";
+window.addEventListener(
+  "click",
+  function () {
+    greeting.textContent = "Good Luck!";
+    startPlaying();
+  },
+  { once: true }
+);
 
 background.onload = function () {
   ctx.canvas.width = background.width;
@@ -18,33 +22,26 @@ background.onload = function () {
   ctx.drawImage(background, 0, 0, background.width, background.height);
 };
 
-console.log(ladybug.getBoundingClientRect());
 
-console.log(ladybug.getBoundingClientRect().left);
-
-let ladybugX = ladybug.getBoundingClientRect().x;
+let ladybugX = ladybug.getBoundingClientRect().left;
 let ladybugY = ladybug.style.y;
 
-let ladybugDX = 1;
-let ladybugDY = 1;
-
 function startPlaying() {
-  // document.body.addEventListener("keyup", function (e) {
-  //   if (ladybugY > 0) {
-  //     y -= 5;
-  //     ladybug.style.bottom = ladybugY + "px";
-  //   }
-    console.log("pressssedd");
-    console.log(ladybug.style.bottom);
-  // });
+  setInterval(ladybugFlying, 100);
 }
+
+var px = ladybug.getBoundingClientRect().left;
+var py = ladybug.getBoundingClientRect().top;
 
 function ladybugFlying() {
-
-  ladybugY -= ladybugDY;
-
-  console.log(ladybugY);
-  console.log('tuka')
+  py = py + 10;
+  ladybug.style.top = py + "px";
+  console.log(ladybug.style.top)
 }
 
-// setInterval(ladybugFlying, 100);
+window.addEventListener("keyup", function() {
+  py = py - 70;
+  ladybug.style.top = py + "px";
+});
+
+// treba da se reshi bugov skoka bubamarkata sama po sebe i bez da e pocnata igrata

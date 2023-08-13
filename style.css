@@ -4,8 +4,9 @@ html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: monospace;
-    color: #4ec0ca;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'VT323', monospace;
+    color: #f50c0d;
 }
 
 
@@ -15,8 +16,9 @@ html, body {
     align-items: center;
     justify-content: center;
     align-content: center;
-    margin-bottom: 0;
-    margin-top: 20px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    background-color: #01c3ff;
 }
 
 .game-results { 
@@ -24,9 +26,9 @@ html, body {
     flex-direction: row;
     justify-content: space-evenly;
     margin-bottom: 20px;
-    margin-top: 10px;
-    font-style: italic;
-    font-size: 15px;
+    margin-top: 50px;
+    font-size: 30px;
+    background-color: #01c3ff;
 }
 
 .wrapper { 
@@ -41,9 +43,16 @@ canvas {
     height: 100%;  
 }
 
-#box {
+#ladybug {
     width: 50px;
     height: 50px;
-    background-color: pink;
+    background-image: url('assets/character/ladybug.png');
+    margin: 50px;
     position: absolute;
+    background-size: cover;
+}
+
+#stripe { 
+    background-color: #01c3ff;
+
 }
