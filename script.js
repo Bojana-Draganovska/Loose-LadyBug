@@ -45,3 +45,50 @@ window.addEventListener("keyup", function() {
 });
 
 // treba da se reshi bugov skoka bubamarkata sama po sebe i bez da e pocnata igrata
+
+//pipes
+let pipeArray = [];
+let pipeWitdh = 64;
+let pipeHeight = 512;
+let pipeX = 50;
+let pipeY = 0;
+let context;
+
+//fizika
+let velocityX = -2;
+
+var topPipeImg;
+var bootomPipeImg;
+
+topPipeImg = new Image()
+topPipeImg.src = "pipes/toppipe.png"
+
+bottomPipeImg = new Image()
+bottomPipeImg.src = "pipes/botpipe.png"
+
+
+function placePipe(){
+  let topPipe = {
+    img: topPipeImg,
+    x : pipeX,
+    y : pipeY,
+    witdh: pipeWitdh,
+    height : pipeHeight,
+    passed : false
+  }
+  pipeArray.push(topPipe);
+}
+
+function placePipes(){
+  setInterval(placePipe, 1500);
+}
+topPipeImg.onload = function(){
+  for(let i =0; i<pipeArray.length; i++){
+    let pipe = pipeArray[i];
+    pipe.x +=velocityX;
+    ctx.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
+    placePipes();
+  }
+}
+
+
