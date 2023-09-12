@@ -178,3 +178,5 @@ function collisonDetect(ladybug, pipe) {
     ladybug.y + ladybug.height > pipe.y
   );
 }
+
+
