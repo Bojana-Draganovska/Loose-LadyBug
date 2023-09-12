@@ -3,16 +3,27 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Loose LadyBug</title>
-    <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&family=VT323&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
     <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
   </head>
 
   <body>
-    <canvas id="canvas"></canvas>
-
+    <h1 id="game-greeting">Good Luck!</h1>
+    <div class="wrapper">
+      <canvas id="canvas"></canvas>
+      <div id="restart"></div>
+    </div>
+    <div class="game-results">
+      <div id="score">Score: <span id="score-value">0</span></div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
