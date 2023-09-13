@@ -1,8 +1,8 @@
 // canvas
-let canvas;
+let canvas = document.getElementById("canvas");
 let canvasWidth = 900;
 let canvasHeight = 500;
-let ctx;
+let ctx = canvas.getContext("2d");
 
 //character - ladybug
 let ladybugWidth = 34;
@@ -34,18 +34,19 @@ let movingX = -2; // pipes moving left
 let movingY = 0; // ladybug jump
 let gravity = 0.2;
 
+let gameStarted = false;
 let gameOver = false;
 let score = 0;
 
 let getScore = document.getElementById("score-value");
+let gameResults = document.getElementById("game-results");
 let gameGreeting = document.getElementById("game-greeting");
 let restartBtn = document.getElementById("restart");
+let startBtn = document.getElementById("start");
 
 window.onload = function () {
-  canvas = document.getElementById("canvas");
   canvas.height = canvasHeight;
   canvas.width = canvasWidth;
-  ctx = canvas.getContext("2d");
 
   //load ladybug
   ladybugImg = new Image();
@@ -68,9 +69,18 @@ window.onload = function () {
   bottomPipeImg.src = "assets/images/bottomPipe.png";
 
   requestAnimationFrame(update);
-  setInterval(placePipes, 1500);
 
-  document.addEventListener("keydown", moveLadybug);
+  function startGame() {
+    if (gameStarted == false) {
+      startBtn.addEventListener("click", function () {
+        startBtn.style.display = "none";
+        gameStarted = true;
+        document.addEventListener("keydown", moveLadybug);
+        setInterval(placePipes, 1500);
+      });
+    }
+  }
+  startGame();
 };
 
 //our main loop
@@ -84,15 +94,17 @@ function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   //ladybug
-  movingY += gravity;
-  ladybug.y = Math.max(ladybug.y + movingY, 0);
-  ctx.drawImage(
-    ladybugImg,
-    ladybug.x,
-    ladybug.y,
-    ladybug.width,
-    ladybug.height
-  );
+  if (gameStarted) {
+    movingY += gravity;
+    ladybug.y = Math.max(ladybug.y + movingY, 0);
+    ctx.drawImage(
+      ladybugImg,
+      ladybug.x,
+      ladybug.y,
+      ladybug.width,
+      ladybug.height
+    );
+  }
 
   if (ladybug.y > canvas.height) {
     gameOver = true;
@@ -108,6 +120,15 @@ function update() {
       score += 0.5; // 0.5 because there are 2 pipes!
       getScore.innerHTML = score;
       pipe.passed = true;
+
+      if (score > 3) {
+        gameGreeting.style.backgroundColor = "#191e35";
+        gameGreeting.style.color = "#8d6641";
+        canvas.style.backgroundImage = "url('assets/images/night.png')";
+        gameResults.style.backgroundColor = "#191e35";
+        gameResults.style.color = "#8d6641";
+      }
+
     }
 
     if (collisonDetect(ladybug, pipe)) {
@@ -116,18 +137,21 @@ function update() {
   }
 
   if (gameOver) {
-    gameGreeting.textContent = "Game Over!";
-  }
-
-  if (gameOver) {
     restartBtn.style.display = "block";
+    gameGreeting.textContent = "Game Over!";
     restartBtn.addEventListener("click", function () {
       restartBtn.style.display = "none";
       pipeArray = [];
       gameGreeting.textContent = "Good Luck!";
       ladybug.y = ladybugY;
       getScore.innerHTML = 0;
+      score = 0;
       gameOver = false;
+      gameGreeting.style.backgroundColor = "#ff356f";
+      gameGreeting.style.color = "#60284d";
+      canvas.style.backgroundImage = "url('assets/images/day.png')";
+      gameResults.style.backgroundColor = "#ff356f";
+      gameResults.style.color = "#60284d";
     });
   }
 }

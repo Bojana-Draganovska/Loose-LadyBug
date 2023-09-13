@@ -5,7 +5,7 @@ html, body {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     font-family: 'VT323', monospace;
-    color: #f50c0d;
+    color: #60284d;
 }
 
     #game-greeting { 
@@ -16,7 +16,7 @@ html, body {
         align-content: center;
         margin-bottom: 50px;
         margin-top: 50px;
-        background-color: #0099cc;
+        background-color: #ff356f;
         border: 2px solid black;
     }
 
@@ -28,9 +28,25 @@ html, body {
         justify-content: center;
     }
 
+        #start {
+            width: 396px;
+            height: 158px;
+            background-image: url('assets/images/start.png');
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: auto;
+            position: absolute;
+            cursor: pointer;
+            background-size: cover;
+            display: block;
+        }
+
         #canvas {
-            background-image: url('assets/images/setup.png');
+            background-image: url('assets/images/day.png');
+            background-size: cover;
             border: 5px solid black;
+            transition: 0.5s ease;
         }
 
         #restart {
@@ -39,6 +55,7 @@ html, body {
             background-image: url('assets/images/restart.png');
             top: 50%;
             left: 50%;
+            cursor: pointer;
             transform: translate(-50%, -50%);
             margin: auto;
             position: absolute;
@@ -46,14 +63,14 @@ html, body {
             display: none;
         }
 
-    .game-results { 
+    #game-results { 
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         margin-bottom: 20px;
         margin-top: 50px;
         font-size: 30px;
-        background-color: #0099cc;
+        background-color: #ff356f;
         border: 2px solid black;
     }
 
