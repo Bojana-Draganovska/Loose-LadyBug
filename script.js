@@ -2,12 +2,14 @@
 let canvas = document.getElementById("canvas");
 let canvasWidth = 900;
 let canvasHeight = 500;
+canvas.height = canvasHeight;
+canvas.width = canvasWidth;
 let ctx = canvas.getContext("2d");
 
 //character - ladybug
 let ladybugWidth = 34;
 let ladybugHeight = 24;
-let ladybugX = canvasWidth / 8;
+let ladybugX = canvasWidth / 10;
 let ladybugY = canvasHeight / 2;
 let ladybugImg;
 
@@ -45,11 +47,8 @@ let restartBtn = document.getElementById("restart");
 let startBtn = document.getElementById("start");
 
 window.onload = function () {
-  canvas.height = canvasHeight;
-  canvas.width = canvasWidth;
-
   //load ladybug
-  ladybugImg = new Image();
+  ladybugImg = document.createElement("img");
   ladybugImg.src = "assets/images/ladybug.png";
   ladybugImg.onload = function () {
     ctx.drawImage(
@@ -61,14 +60,12 @@ window.onload = function () {
     );
   };
 
-  //pipes
-  topPipeImg = new Image();
+  //load pipes
+  topPipeImg = document.createElement("img");
   topPipeImg.src = "assets/images/topPipe.png";
 
-  bottomPipeImg = new Image();
+  bottomPipeImg = document.createElement("img");
   bottomPipeImg.src = "assets/images/bottomPipe.png";
-
-  requestAnimationFrame(update);
 
   function startGame() {
     if (gameStarted == false) {
@@ -81,6 +78,8 @@ window.onload = function () {
     }
   }
   startGame();
+
+  requestAnimationFrame(update);
 };
 
 //our main loop
@@ -128,7 +127,6 @@ function update() {
         gameResults.style.backgroundColor = "#191e35";
         gameResults.style.color = "#8d6641";
       }
-
     }
 
     if (collisonDetect(ladybug, pipe)) {
